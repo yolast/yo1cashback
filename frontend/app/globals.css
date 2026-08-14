@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes avatar-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes burst-glow {
+  from {
+    transform: scale(0.4);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+@keyframes burst-ripple {
+  from {
+    transform: scale(0.3);
+    opacity: 1;
+  }
+  to {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes burst-star {
+  from {
+    transform: scale(0) rotate(-45deg);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.5) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes burst-rise {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-56px);
+    opacity: 0;
+  }
+}
+
+/* ---- arctic tern bird (real sprite) ---- */
+.bird-interactive {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate3d(var(--bird-x, 0), var(--bird-y, 0), 0) scaleX(var(--bird-flip, 1));
+  will-change: transform;
+}
+
+.bird-interactive-sprite {
+  width: var(--bird-w, 96px);
+  height: var(--bird-h, 63px);
+  background-image: url('/bird-sprite.png');
+  background-size: calc(var(--bird-frames, 4) * 100%) 100%;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  transform: rotate(var(--bird-rotate, 0deg));
+  transform-origin: center;
+  filter: drop-shadow(0 6px 10px rgba(2, 6, 23, 0.5));
+}
+
+.bird-interactive-sprite.flapping {
+  animation: bird-flap 0.5s steps(var(--bird-frames, 4)) infinite;
+}
+
+@keyframes bird-flap {
+  from {
+    background-position-x: 0%;
+  }
+  to {
+    background-position-x: 100%;
+  }
+}
+
+:root {
+  --brand: #10b981;
+  --secondary: #0f172a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 disabled:opacity-50;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 disabled:opacity-50;
+  }
+  .input {
+    @apply w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30;
+  }
+  .card {
+    @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+  }
+}
